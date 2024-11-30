@@ -168,11 +168,30 @@ public class GUI extends JFrame {
 
     private void updateWordhunt() {
         while (true) {
-            String userInput = JOptionPane.showInputDialog(this, "Enter the WordHunt characters from left to right then top to bottom:");
-            String userInput2 = JOptionPane.showInputDialog(this, "Enter the row width:");
+            int rowLen;
+            String userInput, userInput2;
+            while (true) {
+                userInput2 = JOptionPane.showInputDialog(this, "Enter the row width:");
+                try {
+                    rowLen = Integer.parseInt(userInput2);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, "Please enter the row width as a single number");
+                }
+            }
+
+            while (true) {
+                userInput = JOptionPane.showInputDialog(this, "Enter the WordHunt characters from left to right then top to bottom:");
+                if (userInput.length() % rowLen != 0) {
+                    JOptionPane.showMessageDialog(this, "Please enter a string representing a complete square or rectangle with the inputted row length.");
+                } else {
+                    break;
+                }
+            }
+
             if (userInput != null && !userInput.isEmpty()) {
                 try {
-                    wordHuntSolver.updateWordHunt(userInput.toUpperCase(), Integer.parseInt(userInput2));
+                    wordHuntSolver.updateWordHunt(userInput.toUpperCase(), rowLen);
                     List<String> updatedWords = wordHuntSolver.solveWordHunt();
                     updateWordList(updatedWords);
                 } catch (IllegalArgumentException e) {
