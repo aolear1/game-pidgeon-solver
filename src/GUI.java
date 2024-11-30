@@ -168,10 +168,11 @@ public class GUI extends JFrame {
 
     private void updateWordhunt() {
         while (true) {
-            int rowLen;
+            int rowLen = 0;
             String userInput, userInput2;
             while (true) {
                 userInput2 = JOptionPane.showInputDialog(this, "Enter the row width:");
+                if(userInput2 == null) break;
                 try {
                     rowLen = Integer.parseInt(userInput2);
                     break;
@@ -180,14 +181,19 @@ public class GUI extends JFrame {
                 }
             }
 
+            if(userInput2 == null) break;
+
             while (true) {
                 userInput = JOptionPane.showInputDialog(this, "Enter the WordHunt characters from left to right then top to bottom:");
+                if(userInput2 == null) break;
                 if (userInput.length() % rowLen != 0) {
                     JOptionPane.showMessageDialog(this, "Please enter a string representing a complete square or rectangle with the inputted row length.");
                 } else {
                     break;
                 }
             }
+
+            if(userInput == null) break;
 
             if (userInput != null && !userInput.isEmpty()) {
                 try {
