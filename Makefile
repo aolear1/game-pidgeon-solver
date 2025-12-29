@@ -1,11 +1,12 @@
-# Makefile for Java Project with subdirectories (wordhunt, trie)
+# Makefile for Game Pidgeon Solver
 
 # Variables
 JAVAC = javac
 JAVA = java
-JFLAGS = -g
+JFLAGS = -g 
 SRC_DIR = src
 BIN_DIR = bin
+SCALE_FLAG = -Dsun.java2d.uiScale=2
 MAIN_CLASS = GUI  # Main class with the main method
 
 # Find all the Java source files, including subdirectories
@@ -16,7 +17,7 @@ CLASSES = $(SOURCES:$(SRC_DIR)/%.java=$(BIN_DIR)/%.class)
 
 # Default target: compile and run the project
 all: $(BIN_DIR) $(CLASSES)
-	$(JAVA) -cp $(BIN_DIR) $(MAIN_CLASS)
+	$(JAVA) $(SCALE_FLAG) -cp $(BIN_DIR) $(MAIN_CLASS)
 
 # Rule to create the bin directory if it doesn't exist
 $(BIN_DIR):
